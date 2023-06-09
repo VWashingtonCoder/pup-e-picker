@@ -97,8 +97,6 @@ function App() {
   };
 
   const trashDog = (id) => {
-    console.log(id);
-    // PUT update dog at id and set isFavorites to true
     const deleteRequestOptions = {
       method: "DELETE",
       redirect: "follow",
