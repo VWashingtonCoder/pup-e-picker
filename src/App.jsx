@@ -97,6 +97,23 @@ function App() {
   const trashDog = (id) => {
     console.log(id);
     // PUT update dog at id and set isFavorites to true
+    const deleteRequestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch(`${dbUrl}/${id}`, deleteRequestOptions)
+      .then(response => response.json())
+      .then(() => {
+        const newAllDogs = allDogs.filter(dog => dog.id !== id);
+        const newFavsList = favoriteDogs.filter(dog => dog.id !== id);
+        const newUnfavsList = unfavoriteDogs.filter(dog => dog.id !== id); 
+           
+        setAllDogs(newAllDogs);
+        setFavoriteDogs(newFavsList);
+        setUnfavoriteDogs(newUnfavsList);
+      })
+      .catch(error => console.log('error', error));
   };
 
   return (
