@@ -116,6 +116,22 @@ function App() {
       .catch((error) => console.log("error", error));
   };
 
+  const addDog = (dogData) => {
+    const postRequestOptions = {
+      ...requestOptions,
+      method: "POST",
+      body: JSON.stringify(dogData),
+    };
+
+    fetch(dbUrl, postRequestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setAllDogs([...allDogs, result]);
+        setUnfavoriteDogs([...unfavoriteDogs, result]);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <div className="App">
       <header>
@@ -138,7 +154,7 @@ function App() {
             trash={trashDog}
           />
         ) : (
-          <CreateDogForm />
+          <CreateDogForm addDog={addDog} />
         )}
       </Section>
     </div>

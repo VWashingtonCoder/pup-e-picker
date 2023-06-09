@@ -1,23 +1,19 @@
 export const Section = (props) => {
-  const {
-    change,
-    favoriteDogCount,
-    unfavoriteDogCount,
-    view,
-    children,
-  } = props;
+  const { change, favoriteDogCount, unfavoriteDogCount, view, children } =
+    props;
 
   const dogLabels = {
     all: "All",
     favorite: "Favorite",
-    unfavorite: "Unfavorite"
-  }
+    unfavorite: "Unfavorite",
+  };
 
   const handleViewChange = (e) => {
-    let viewKey = e.target.value;
-    if (viewKey === view) viewKey = "all";
-    change(viewKey);
-  }
+    change(e.target.value !== view 
+      ? e.target.value 
+      : "all"
+    );
+  };
 
   return (
     <section>
@@ -28,7 +24,7 @@ export const Section = (props) => {
         <div className="selectors">
           {/* Add the class 'active' to any selector in order to make it's color change */}
           {/* This should display the favorited count */}
-          <button 
+          <button
             className={`selector ${view === "favorite" ? "active" : ""}`}
             onClick={handleViewChange}
             value="favorite"
@@ -38,14 +34,14 @@ export const Section = (props) => {
 
           {/* This should display the unfavorited count */}
 
-          <button 
+          <button
             className={`selector ${view === "unfavorite" ? "active" : ""}`}
             onClick={handleViewChange}
             value="unfavorite"
           >
             unfavorited ( {unfavoriteDogCount} )
           </button>
-          <button 
+          <button
             className={`selector ${view === "create" ? "active" : ""}`}
             onClick={handleViewChange}
             value="create"
