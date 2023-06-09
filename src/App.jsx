@@ -50,7 +50,7 @@ function App() {
     const patchRequestOptions = {
       ...requestOptions,
       method: "PATCH",
-      body: JSON.stringify({ isFavorite: true })
+      body: JSON.stringify({ isFavorite: true }),
     };
 
     fetch(`${dbUrl}/${id}/`, patchRequestOptions)
@@ -74,14 +74,16 @@ function App() {
     const patchRequestOptions = {
       ...requestOptions,
       method: "PATCH",
-      body: JSON.stringify({ isFavorite: false })
+      body: JSON.stringify({ isFavorite: false }),
     };
 
     fetch(`${dbUrl}/${id}/`, patchRequestOptions)
       .then((response) => response.json())
       .then((result) => {
         const unfavDog = result;
-        const newAllDogs = allDogs.map((dog) => (dog.id === id ? unfavDog : dog));
+        const newAllDogs = allDogs.map((dog) =>
+          dog.id === id ? unfavDog : dog
+        );
         const newUnfavsList = [...unfavoriteDogs, unfavDog].sort(
           (a, b) => a.id - b.id
         );
@@ -98,22 +100,22 @@ function App() {
     console.log(id);
     // PUT update dog at id and set isFavorites to true
     const deleteRequestOptions = {
-      method: 'DELETE',
-      redirect: 'follow'
+      method: "DELETE",
+      redirect: "follow",
     };
-    
+
     fetch(`${dbUrl}/${id}`, deleteRequestOptions)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(() => {
-        const newAllDogs = allDogs.filter(dog => dog.id !== id);
-        const newFavsList = favoriteDogs.filter(dog => dog.id !== id);
-        const newUnfavsList = unfavoriteDogs.filter(dog => dog.id !== id); 
-           
+        const newAllDogs = allDogs.filter((dog) => dog.id !== id);
+        const newFavsList = favoriteDogs.filter((dog) => dog.id !== id);
+        const newUnfavsList = unfavoriteDogs.filter((dog) => dog.id !== id);
+
         setAllDogs(newAllDogs);
         setFavoriteDogs(newFavsList);
         setUnfavoriteDogs(newUnfavsList);
       })
-      .catch(error => console.log('error', error));
+      .catch((error) => console.log("error", error));
   };
 
   return (
