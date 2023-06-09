@@ -36,6 +36,23 @@ function App() {
     setCurrentView(viewKey);
   };
 
+  const addToFavorites = (id) => {
+    console.log(id)
+    // PUT update dog at id by setting isFavorites to true
+    // update dog at id 
+  }
+
+  const removeFromFavorites = (id) => {
+    console.log(id)
+    // PUT update dog at id and set isFavorites to true
+  }
+
+  const trashDog = (id) => {
+    console.log(id)
+     // PUT update dog at id and set isFavorites to true
+  }
+
+
   return (
     <div className="App">
       <header>
@@ -53,6 +70,9 @@ function App() {
             favoriteDogs={favoriteDogs}
             unfavoriteDogs={unfavoriteDogs}
             view={currentView}
+            addFav={addToFavorites}
+            minusFav={removeFromFavorites}
+            trash={trashDog}
           />
         ) : (
           <CreateDogForm />

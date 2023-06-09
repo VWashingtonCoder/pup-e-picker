@@ -1,20 +1,35 @@
 import { FavoriteButton } from "./FavoriteButton";
 import { TrashButton } from "./TrashButton";
 import { UnfavoriteButton } from "./UnfavoriteButton";
-export const DogCard = ({
-  dog: { name, image, description, id, isFavorite },
-}) => {
+export const DogCard = (props) => {
+  const {
+    dog: { name, image, description, id, isFavorite },
+    addFav,
+    minusFav,
+    trash,
+  } = props;
+
+  const handleFavoriteBtn = () => {
+    addFav(id);
+  };
+  const handleUnfavoriteBtn = () => {
+    minusFav(id);
+  };
+  const handleTrashBtn = () => {
+    trash(id);
+  };
+
   return (
     <div className="dog-card">
       {/* Choose which button to show depending on if dog is a favorite */}
       {isFavorite ? (
-        <UnfavoriteButton onClick={() => {}} />
+        <UnfavoriteButton onClick={handleUnfavoriteBtn} />
       ) : (
-        <FavoriteButton onClick={() => {}} />
+        <FavoriteButton onClick={handleFavoriteBtn} />
       )}
 
       {/* Use this button to delete a puppy :( */}
-      <TrashButton disabled={true} onClick={() => {}} />
+      <TrashButton onClick={handleTrashBtn} />
 
       {/* Ignore this  */}
       {/* You can temporarily set a favorite overlay after a user favoritest a dog */}
