@@ -50,7 +50,7 @@ function App() {
     const patchRequestOptions = {
       ...requestOptions,
       method: "PATCH",
-      body: JSON.stringify({ isFavorite: true }),
+      body: JSON.stringify({ isFavorite: true })
     };
 
     fetch(`${dbUrl}/${id}/`, patchRequestOptions)
@@ -58,21 +58,40 @@ function App() {
       .then((result) => {
         const favDog = result;
         const newAllDogs = allDogs.map((dog) => (dog.id === id ? favDog : dog));
-        const newFavList = [...favoriteDogs, favDog].sort(
+        const newFavsList = [...favoriteDogs, favDog].sort(
           (a, b) => a.id - b.id
         );
         const newUnfavsList = unfavoriteDogs.filter((dog) => dog.id !== id);
 
         setAllDogs(newAllDogs);
-        setFavoriteDogs(newFavList);
+        setFavoriteDogs(newFavsList);
         setUnfavoriteDogs(newUnfavsList);
       })
       .catch((error) => console.log("error", error));
   };
 
   const removeFromFavorites = (id) => {
-    console.log(id);
-    // PUT update dog at id and set isFavorites to true
+    const patchRequestOptions = {
+      ...requestOptions,
+      method: "PATCH",
+      body: JSON.stringify({ isFavorite: false })
+    };
+
+    fetch(`${dbUrl}/${id}/`, patchRequestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const unfavDog = result;
+        const newAllDogs = allDogs.map((dog) => (dog.id === id ? unfavDog : dog));
+        const newUnfavsList = [...unfavoriteDogs, unfavDog].sort(
+          (a, b) => a.id - b.id
+        );
+        const newFavsList = favoriteDogs.filter((dog) => dog.id !== id);
+
+        setAllDogs(newAllDogs);
+        setUnfavoriteDogs(newUnfavsList);
+        setFavoriteDogs(newFavsList);
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const trashDog = (id) => {
