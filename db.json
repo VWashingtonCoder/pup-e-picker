@@ -139,13 +139,6 @@
       "description": "payment Plastic Electric intranet Bicycle foreground Agent",
       "isFavorite": false,
       "id": 19
-    },
-    {
-      "name": "Rusty",
-      "image": "/src/assets/boxer.jpeg",
-      "description": "He's a really good boy",
-      "isFavorite": false,
-      "id": 21
     }
   ]
 }

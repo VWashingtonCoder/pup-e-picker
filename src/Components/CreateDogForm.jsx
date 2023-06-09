@@ -6,6 +6,12 @@ export const CreateDogForm = ({ addDog }) => {
   const [dogDescription, setDogDescription] = useState("");
   const [selectedImage, setSelectedImage] = useState(dogPictures.BlueHeeler);
 
+  const resetForm = () => {
+    setDogName("");
+    setDogDescription("");
+    setSelectedImage(dogPictures.BlueHeeler);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const dogData = {
@@ -15,6 +21,7 @@ export const CreateDogForm = ({ addDog }) => {
       isFavorite: false,
     };
     addDog(dogData);
+    resetForm();
   };
 
   return (
