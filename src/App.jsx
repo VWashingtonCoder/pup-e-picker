@@ -11,7 +11,7 @@ function App() {
   const [unfavoriteDogs, setUnfavoriteDogs] = useState([]);
   const [currentView, setCurrentView] = useState("all");
 
-  function getFavoriteDogs(allDogs) {
+  function sortFavoriteDogs(allDogs) {
     const sortedDogs = { favDogs: [], unfavDogs: [] };
     allDogs.forEach((dog) => {
       dog.isFavorite
@@ -25,7 +25,7 @@ function App() {
     fetch("http://localhost:3000/dogs")
       .then((res) => res.json())
       .then((data) => {
-        const { favDogs, unfavDogs } = getFavoriteDogs(data);
+        const { favDogs, unfavDogs } = sortFavoriteDogs(data);
         setAllDogs(data);
         setFavoriteDogs(favDogs);
         setUnfavoriteDogs(unfavDogs);
@@ -33,24 +33,26 @@ function App() {
   }, []);
 
   const changeView = (viewKey) => {
-    setCurrentView(viewKey)
-  }
+    setCurrentView(viewKey);
+  };
 
   return (
     <div className="App">
       <header>
         <h1>pup-e-picker</h1>
       </header>
-      <Section 
+      <Section
         change={changeView}
-        label={"Dogs: "} 
+        label={"Dogs: "}
         favoriteDogCount={favoriteDogs.length}
-        unfavoriteDogCount = {unfavoriteDogs.length}
+        unfavoriteDogCount={unfavoriteDogs.length}
         view={currentView}
-    
       >
-        <Dogs label={"All Dogs"} dogs={allDogs} />
-        {/* <CreateDogForm /> */}
+        {currentView !== "create" ? (
+          <Dogs label={"All Dogs"} dogs={allDogs} />
+        ) : (
+          <CreateDogForm />
+        )}
       </Section>
     </div>
   );
