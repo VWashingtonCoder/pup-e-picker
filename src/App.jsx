@@ -5,6 +5,16 @@ import { Dogs } from "./Components/Dogs";
 import { Section } from "./Components/Section";
 import "./fonts/RubikBubbles-Regular.ttf";
 
+const dbUrl = "http://localhost:3000/dogs";
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+const requestOptions = {
+  method: "",
+  headers: myHeaders,
+  body: {},
+  redirect: "follow",
+};
+
 function App() {
   const [allDogs, setAllDogs] = useState([]);
   const [favoriteDogs, setFavoriteDogs] = useState([]);
@@ -22,7 +32,7 @@ function App() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/dogs")
+    fetch(dbUrl)
       .then((res) => res.json())
       .then((data) => {
         const { favDogs, unfavDogs } = sortFavoriteDogs(data);
@@ -37,21 +47,38 @@ function App() {
   };
 
   const addToFavorites = (id) => {
-    console.log(id)
-    // PUT update dog at id by setting isFavorites to true
-    // update dog at id 
-  }
+    const patchRequestOptions = {
+      ...requestOptions,
+      method: "PATCH",
+      body: JSON.stringify({ isFavorite: true }),
+    };
+
+    fetch(`${dbUrl}/${id}/`, patchRequestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        const favDog = result;
+        const newAllDogs = allDogs.map((dog) => (dog.id === id ? favDog : dog));
+        const newFavList = [...favoriteDogs, favDog].sort(
+          (a, b) => a.id - b.id
+        );
+        const newUnfavsList = unfavoriteDogs.filter((dog) => dog.id !== id);
+
+        setAllDogs(newAllDogs);
+        setFavoriteDogs(newFavList);
+        setUnfavoriteDogs(newUnfavsList);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   const removeFromFavorites = (id) => {
-    console.log(id)
+    console.log(id);
     // PUT update dog at id and set isFavorites to true
-  }
+  };
 
   const trashDog = (id) => {
-    console.log(id)
-     // PUT update dog at id and set isFavorites to true
-  }
-
+    console.log(id);
+    // PUT update dog at id and set isFavorites to true
+  };
 
   return (
     <div className="App">
@@ -65,7 +92,7 @@ function App() {
         view={currentView}
       >
         {currentView !== "create" ? (
-          <Dogs 
+          <Dogs
             allDogs={allDogs}
             favoriteDogs={favoriteDogs}
             unfavoriteDogs={unfavoriteDogs}
