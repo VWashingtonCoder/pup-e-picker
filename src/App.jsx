@@ -10,11 +10,6 @@ function App() {
   const [favoriteDogs, setFavoriteDogs] = useState([]);
   const [unfavoriteDogs, setUnfavoriteDogs] = useState([]);
   const [currentView, setCurrentView] = useState("all");
-  const dogLabels = {
-    all: "All Dogs",
-    favorite: "Favorite Dogs",
-    unfavorite: "Unfavorite Dogs"
-  }
 
   function sortFavoriteDogs(allDogs) {
     const sortedDogs = { favDogs: [], unfavDogs: [] };
@@ -48,7 +43,6 @@ function App() {
       </header>
       <Section
         change={changeView}
-        label={`Dogs: ${currentView !== "create" ? dogLabels[currentView] : ""}`}
         favoriteDogCount={favoriteDogs.length}
         unfavoriteDogCount={unfavoriteDogs.length}
         view={currentView}

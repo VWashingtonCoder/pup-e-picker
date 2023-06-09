@@ -1,12 +1,17 @@
 export const Section = (props) => {
   const {
     change,
-    label,
     favoriteDogCount,
     unfavoriteDogCount,
     view,
     children,
   } = props;
+
+  const dogLabels = {
+    all: "All",
+    favorite: "Favorite",
+    unfavorite: "Unfavorite"
+  }
 
   const handleViewChange = (e) => {
     let viewKey = e.target.value;
@@ -17,7 +22,9 @@ export const Section = (props) => {
   return (
     <section>
       <div className="container-header">
-        <div className="container-label">{label}</div>
+        <div className="container-label">
+          Dogs: {view !== "create" ? dogLabels[view] : ""}
+        </div>
         <div className="selectors">
           {/* Add the class 'active' to any selector in order to make it's color change */}
           {/* This should display the favorited count */}
