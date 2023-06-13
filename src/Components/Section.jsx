@@ -9,10 +9,7 @@ export const Section = (props) => {
   };
 
   const handleViewChange = (e) => {
-    change(e.target.value !== view 
-      ? e.target.value 
-      : "all"
-    );
+    change(e.target.value !== view ? e.target.value : "all");
   };
 
   return (

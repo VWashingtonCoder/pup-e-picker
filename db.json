@@ -11,7 +11,7 @@
       "name": "Clifford",
       "image": "/src/assets/cowardly.png",
       "description": "Buckinghamshire peal outmaneuver Cargo compressing utilize Southwest whiff",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 1
     },
     {
@@ -25,14 +25,14 @@
       "name": "Jadon",
       "image": "/src/assets/blue-heeler.png",
       "description": "aspernatur transmit Underpass female North tan music",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 3
     },
     {
       "name": "Maribel",
       "image": "/src/assets/cowardly.png",
       "description": "Pants ohm Turcotte drive mole Southwest North Awesome",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 4
     },
     {
@@ -46,7 +46,7 @@
       "name": "Hunter",
       "image": "/src/assets/boxer.png",
       "description": "Cheese Handcrafted owlishly program TCP Sanford shadowy",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 6
     },
     {
